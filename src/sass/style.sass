@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap')
+
+
+* 
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    list-style-type: none
+    font-family: 'Roboto', sans-serif
+
+button
+    cursor: pointer
+    border: none
+    width: 6vw
+    height:6vw
+    font-size: 30px
+    margin: 5px
+    outline: none
+
+.container
+    width: 50%
+    margin: 0 auto
+    background-color: #e6dede
+    overflow: hidden
+
+.main
+    &__output
+        width: 90%
+        height: 140px
+        background-color: #fcffed
+        margin: 20px auto 
+        font-family: 'Audiowide', sans-serif
+        padding: 20px
+        font-size: 70px
+        text-align: right
+        color: #535353
+    &__input
+        padding: 30px
+        display: grid
+        grid-template-columns: repeat(3, 1fr)
+        gap: 1vw
+        &-left 
+        &-center 
+            display: flex
+            flex-direction: column
+            .top
+                display: grid
+                grid-template-rows: 1fr
+                grid-template-columns: repeat(3, 1fr)
+  
+            .numbers 
+                display: grid
+                grid-template-columns: repeat(3, 1fr)
+                li:last-child
+                    grid-column-start: 3
+        &-right
+            display: grid
+            grid-template-columns: repeat(2, 1fr)
+            li:nth-child(7)
+                grid-row-start: 4
+                grid-row-end: 6
+                button
+                    height: 95%
