@@ -85,52 +85,48 @@ document
 
     switch (target) {
       case document.querySelector('li button[data-operator="+"]'):
-        mainObj.operandA = input.value;
-        mainObj.operator = "+";
-        clear();
+        doOperation("+");
         break;
       case document.querySelector('li button[data-operator="-"]'):
-        mainObj.operandA = input.value;
-        mainObj.operator = "-";
-        clear();
+        doOperation("-");
         break;
       case document.querySelector('li button[data-operator="*"]'):
-        mainObj.operandA = input.value;
-        mainObj.operator = "*";
-        clear();
+        doOperation("*");
         break;
       case document.querySelector('li button[data-operator="/"]'):
-        mainObj.operandA = input.value;
-        mainObj.operator = "/";
-        clear();
+        doOperation("/");
         break;
       case document.querySelector('li button[data-operator="equals"]'):
-        isResultShown = true;
-        mainObj.operandB = input.value;
-        if (
-          typeof mainObj.operandA != null &&
-          typeof mainObj.operandB != null
-        ) {
-          switch (mainObj.operator) {
-            case "+":
-              roundIt("+");
-              break;
-
-            case "-":
-              roundIt("-");
-              break;
-            case "/":
-              roundIt("/");
-              break;
-            case "*":
-              roundIt("*");
-              break;
-          }
-          mainObj.operandA = null;
-          mainObj.operandB = null;
-        }
+        equal();
         break;
     }
+  });
+console.log(document.querySelector(".main__input-right"));
+
+document.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "+":
+      doOperation("+");
+      break;
+    case "-":
+      doOperation("-");
+      break;
+    case "Enter":
+      equal();
+      break;
+    case "/":
+      doOperation("/");
+      break;
+    case "*":
+      doOperation("*");
+      break;
+  }
+});
+
+document
+  .querySelector('[data-clear="clearAll"]')
+  .addEventListener("click", () => {
+    clearAll();
   });
 
 //FUNCTIONS DECLARATIONS
@@ -167,4 +163,35 @@ function roundIt(s) {
   input.value = eval(Number(mainObj.operandA) + s + Number(mainObj.operandB))
     .toFixed(3)
     .replace(/[,.]?0+$/, "");
+}
+function equal() {
+  if (isResultShown == false) {
+    isResultShown = true;
+    mainObj.operandB = input.value;
+    if (typeof mainObj.operandA != null && typeof mainObj.operandB != null) {
+      switch (mainObj.operator) {
+        case "+":
+          roundIt("+");
+          break;
+
+        case "-":
+          roundIt("-");
+          break;
+        case "/":
+          roundIt("/");
+          break;
+        case "*":
+          roundIt("*");
+          break;
+      }
+      mainObj.operandA = null;
+      mainObj.operandB = null;
+    }
+  }
+}
+
+function doOperation(operator) {
+  mainObj.operandA = input.value;
+  mainObj.operator = operator;
+  clear();
 }
